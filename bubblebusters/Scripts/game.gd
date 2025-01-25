@@ -70,5 +70,9 @@ func generate_maze():
 				if randy.randf() < b:
 					tilemap.set_cell(1,current_cell,0,Vector2i(6,0),0)
 		  
-			
+	for x in range(1, width-1):
+		for y in range(1, height-1):
+			var curent_tile = Vector2i(x,y+offset)
+			if(is_cell_empty(1,curent_tile))	:
+				tilemap.set_cell(0,curent_tile,sourceID,Vector2i(1,7),0)
 		#create the background

@@ -1,5 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://bitqosb72ka8i"]
+[gd_scene load_steps=23 format=3 uid="uid://bitqosb72ka8i"]
 
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_jhoa4"]
 [ext_resource type="Texture2D" uid="uid://brtm5kbowdo60" path="res://Data/loose sprites.png" id="2_vyeij"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w3idj"]
@@ -33,6 +34,14 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2j3cm"]
 atlas = ExtResource("2_vyeij")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lw54"]
+atlas = ExtResource("2_vyeij")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qnpo"]
+atlas = ExtResource("2_vyeij")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1mhu3"]
 atlas = ExtResource("2_vyeij")
@@ -104,6 +113,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_3lw54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qnpo")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_1mhu3")
 }, {
 "duration": 1.0,
@@ -141,11 +161,15 @@ animations = [{
 radius = 8.48528
 
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(540, 349)
+scale = Vector2(-5.05535, 6.72637)
+script = ExtResource("1_jhoa4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_bdcr2")
-animation = &"Right_run"
-frame_progress = 0.917723
+animation = &"Idle"
+frame_progress = 0.313438
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_j8maa")

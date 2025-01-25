@@ -123,3 +123,6 @@ tile_set = SubResource("TileSet_v6yq5")
 format = 2
 layer_0/name = "Backgroud"
 layer_1/name = "Walls"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(283, 160)

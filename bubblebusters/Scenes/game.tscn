@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bitqosb72ka8i" path="res://Scenes/player.tscn" id="3_ga5nf"]
 [ext_resource type="Script" path="res://Scripts/score.gd" id="5_rtw2q"]
 [ext_resource type="Script" path="res://Scripts/endscreen.gd" id="6_g473b"]
-[ext_resource type="Script" path="res://Scripts/start_screen.gd" id="7_7a2aq"]
+[ext_resource type="Theme" uid="uid://ceaxcjqy7kuuk" path="res://Themes.tres" id="8_0rcea"]
 [ext_resource type="FontFile" uid="uid://ctgaiinq4weiy" path="res://Data/Bubblegum.ttf" id="8_3qxu6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8nhe5"]
@@ -161,7 +161,6 @@ editor_draw_limits = true
 
 [node name="EndScreen" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 script = ExtResource("6_g473b")
 
 [node name="GameOver" type="Label" parent="EndScreen"]
@@ -169,6 +168,7 @@ offset_left = 386.0
 offset_top = 97.0
 offset_right = 686.0
 offset_bottom = 197.0
+theme_override_fonts/font = ExtResource("8_3qxu6")
 theme_override_font_sizes/font_size = 46
 text = "Game Over!"
 horizontal_alignment = 1
@@ -179,6 +179,7 @@ offset_left = 58.0
 offset_top = 17.0
 offset_right = 1111.0
 offset_bottom = 616.0
+theme = ExtResource("8_0rcea")
 
 [node name="Button" type="Button" parent="EndScreen"]
 offset_left = 483.0
@@ -186,6 +187,7 @@ offset_top = 383.0
 offset_right = 533.0
 offset_bottom = 414.0
 scale = Vector2(2.45349, 2.10479)
+theme = ExtResource("8_0rcea")
 theme_override_fonts/font = ExtResource("8_3qxu6")
 text = "Retry"
 
@@ -198,39 +200,6 @@ scale = Vector2(3.64497, 3.19973)
 theme_override_fonts/font = ExtResource("8_3qxu6")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="StartScreen" type="CanvasLayer" parent="."]
-process_mode = 3
-script = ExtResource("7_7a2aq")
-
-[node name="Welcome" type="Label" parent="StartScreen"]
-offset_left = 102.0
-offset_top = 145.0
-offset_right = 1040.0
-offset_bottom = 256.0
-scale = Vector2(1.03306, 1.2825)
-theme_override_fonts/font = ExtResource("8_3qxu6")
-theme_override_font_sizes/font_size = 32
-text = "Welcome to Bubble Busters!
-Get as many bubbles as you can in a minute and have fun!
-PS: The timers already going!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Panel" type="Panel" parent="StartScreen"]
-offset_left = 59.0
-offset_top = 76.0
-offset_right = 1117.0
-offset_bottom = 628.0
-
-[node name="Play" type="Button" parent="StartScreen"]
-offset_left = 502.0
-offset_top = 345.0
-offset_right = 543.0
-offset_bottom = 376.0
-scale = Vector2(3.1422, 1.81426)
-theme_override_fonts/font = ExtResource("8_3qxu6")
-text = "Play"
 
 [node name="ScoreCorner" type="CanvasLayer" parent="."]
 
@@ -272,4 +241,3 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_s6o3f")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="EndScreen/Button" to="EndScreen" method="_on_button_pressed"]
-[connection signal="pressed" from="StartScreen/Play" to="StartScreen" method="_on_play_pressed"]

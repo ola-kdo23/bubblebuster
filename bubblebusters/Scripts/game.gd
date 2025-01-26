@@ -16,7 +16,7 @@ var height = 21
 const sourceID: int = 0
 var randy= RandomNumberGenerator.new()
 var bubbleCount : int
-var time_len = 65
+var time_len = 10
 
 func _ready() -> void:
 	generate_maze() #generate a map as soon as the game loads
@@ -112,5 +112,5 @@ func update_timer()-> void:
 	
 
 func showresults()-> void:
-	$EndScreen/EndResults.text="You got " + str(Global.score) + " / " + str(bubbleCount) + "bubbles!!"
+	$EndScreen/EndResults.text="You got " + str(Global.score) + " / " + str(bubbleCount) + " bubbles!!"
 	$EndScreen.end_game()

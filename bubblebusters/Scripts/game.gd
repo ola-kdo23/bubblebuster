@@ -5,8 +5,7 @@ class_name Maze
 @onready var player = $Player
 @onready var music=$Music
 @onready var timer=$Timer
-@onready var timer_label=$TimerLabel
-@onready var results =$Results
+@onready var timer_label=$TimerCorner/TimerLabel
 var bubblePath = preload("res://Scenes/bubble.tscn")
 
 
@@ -17,12 +16,10 @@ var height = 21
 const sourceID: int = 0
 var randy= RandomNumberGenerator.new()
 var bubbleCount : int
-var time_len = 10
+var time_len = 65
 
 func _ready() -> void:
 	generate_maze() #generate a map as soon as the game loads
-	
-	print(bubbleCount)
 	timer.start()
 	timer.connect("timeout", Callable(self, "_on_game_timer_timeout"))
 	update_timer()
@@ -31,6 +28,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
 
 ## check if a cell in the tile map is empty 
 func is_cell_empty(layer, coordinates):
@@ -103,6 +101,7 @@ func update_timer_label()-> void:
 	timer_label.text = "Time Left: " + str(time_len) + "s"
 	
 func update_timer()-> void:
+	
 	while time_len>0:
 		update_timer_label()
 		await get_tree().create_timer(1).timeout
@@ -110,7 +109,8 @@ func update_timer()-> void:
 		
 	if(time_len==0):
 		showresults()
+	
 
 func showresults()-> void:
-	$EndScreen/EndResults.text="you got " + str(Global.score) + " / " + str(bubbleCount) + "bubbles!!"
+	$EndScreen/EndResults.text="You got " + str(Global.score) + " / " + str(bubbleCount) + "bubbles!!"
 	$EndScreen.end_game()

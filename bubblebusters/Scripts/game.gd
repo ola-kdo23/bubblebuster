@@ -3,6 +3,8 @@ class_name Maze
 
 @onready var tilemap=$TileMap
 @onready var player = $Player
+@onready var music=$Music
+
 var bubblePath = preload("res://Scenes/bubble.tscn")
 
 
@@ -10,17 +12,13 @@ var bubblePath = preload("res://Scenes/bubble.tscn")
 var width = 35
 var height = 21
 
-#map offset for UI purposes
-var offset = 2
-
 const sourceID: int = 0
-
 var randy= RandomNumberGenerator.new()
-var spawnzone=[Vector2i(width/2-offset,height/2),
-	Vector2(width/2-offset,height/2+1), Vector2i(width/2-offset,height/2+offset)]
+var bubbleCount : int
 
 func _ready() -> void:
 	generate_maze() #generate a map as soon as the game loads
+	print(bubbleCount)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,7 +38,7 @@ func generate_maze():
 	for x in range(width):
 		for y in range(height):
 			if x==0 or x==width -1 or y==0 or y ==height -1:
-				tilemap.set_cell(1,Vector2i(x, y + offset),sourceID,Vector2i(6,0),0)
+				tilemap.set_cell(1,Vector2i(x, y ),sourceID,Vector2i(6,0),0)
 				
 				
 	#create the random walls inside the room
@@ -48,14 +46,14 @@ func generate_maze():
 		for y in range(1, height-2):
 			if x%2==0 and y%2==0:   #create a wal at every other cell
 				#pass
-				tilemap.set_cell(1,Vector2i(x,y+offset),sourceID,Vector2i(6,0),0)
+				tilemap.set_cell(1,Vector2i(x,y),sourceID,Vector2i(6,0),0)
 	
 
 	for x in range(1,width-1):  
 		for y in range(1,height-1):
 			var wall_chance=0.2
 			var b=randy.randf_range(-0.12,0.36)
-			var current_cell = Vector2i(x,y+offset)
+			var current_cell = Vector2i(x,y)
 			var skip_cell=false
 			
 			#if youre at a cell or at the center of the maze skip those cells
@@ -76,7 +74,7 @@ func generate_maze():
 	#create the background
 	for x in range(1, width-1):
 		for y in range(1, height-1):
-			var curent_tile = Vector2i(x,y+offset)
+			var curent_tile = Vector2i(x,y)
 			if(is_cell_empty(1,curent_tile))	:
 				tilemap.set_cell(0,curent_tile,sourceID,Vector2i(0,7),0)
 				
@@ -84,8 +82,9 @@ func generate_maze():
 				if randy.randf_range(0,1) < 0.12 && (curent_tile.x!=120 && curent_tile.y!=120):
 					print("hello")
 					var b= bubblePath.instantiate()
-					b.position= Vector2i((x*16)+8,((y+offset)*16)+8)
+					b.position= Vector2i((x*16)+8,(y*16)+8)
 					add_child(b)
+					bubbleCount+=1
 				
 	callPlayer()
 	
@@ -93,7 +92,5 @@ func generate_maze():
 func callPlayer():
 	player.position=Vector2i(120,120)
 	
-func bubblemaker():
-	var b= bubblePath.instantiate()
-	get_parent().add_child(b)
+
 	

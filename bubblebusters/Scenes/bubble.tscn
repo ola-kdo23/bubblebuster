@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bo7ixlwbrmcbt"]
+[gd_scene load_steps=5 format=3 uid="uid://bo7ixlwbrmcbt"]
 
 [ext_resource type="Texture2D" uid="uid://5a1i5b6r4057" path="res://Data/New Piskel (4).png" id="1_h01rg"]
 [ext_resource type="Script" path="res://Scripts/bubble.gd" id="1_tpgcy"]
+[ext_resource type="AudioStream" uid="uid://uurjx2do03id" path="res://Data/776443__chaferwitt__pop-out-bubble-soft-bursting.mp3" id="3_22raf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_csha7"]
 
@@ -17,5 +18,9 @@ shape = SubResource("CircleShape2D_csha7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_h01rg")
+
+[node name="PopSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_22raf")
+volume_db = 5.448
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,7 +2,7 @@ extends Node2D
 class_name Maze
 
 @onready var tilemap=$TileMap
-
+@onready var player = $Player
 #the width and height 
 var width = 37
 var height = 21
@@ -17,7 +17,7 @@ var randy= RandomNumberGenerator.new()
 
 func _ready() -> void:
 	generate_maze() #generate a map as soon as the game loads
-
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -44,6 +44,7 @@ func generate_maze():
 	for x in range(1,width-2):
 		for y in range(1, height-2):
 			if x%2==0 and y%2==0:   #create a wal at every other cell
+				#pass
 				tilemap.set_cell(1,Vector2i(x,y+offset),sourceID,Vector2i(6,0),0)
 	
 
@@ -68,11 +69,12 @@ func generate_maze():
 			if is_cell_empty(1, current_cell):
 				print("yupe")
 				if randy.randf() < b:
-					tilemap.set_cell(1,current_cell,0,Vector2i(6,0),0)
-		  
+					tilemap.set_cell(1,current_cell,sourceID,Vector2i(6,0),0)
+	
+	#create the background
 	for x in range(1, width-1):
 		for y in range(1, height-1):
 			var curent_tile = Vector2i(x,y+offset)
 			if(is_cell_empty(1,curent_tile))	:
-				tilemap.set_cell(0,curent_tile,sourceID,Vector2i(1,7),0)
-		#create the background
+				tilemap.set_cell(0,curent_tile,sourceID,Vector2i(0,7),0)
+		

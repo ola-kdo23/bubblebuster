@@ -123,10 +123,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j8maa"]
-radius = 1.78029
+radius = 1.38467
 
-[node name="Player" type="CharacterBody2D"]
-position = Vector2(544, 349)
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+position = Vector2(546, 349)
 scale = Vector2(-5.05535, 6.72637)
 script = ExtResource("1_jhoa4")
 metadata/_edit_group_ = true

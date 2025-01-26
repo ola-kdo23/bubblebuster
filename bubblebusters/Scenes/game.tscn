@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxrxd24vd160v"]
+[gd_scene load_steps=7 format=3 uid="uid://dxrxd24vd160v"]
 
 [ext_resource type="Texture2D" uid="uid://cqtshkypd7g3v" path="res://Data/CosmicLilac_Tiles.png" id="1_8ehar"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_umhj7"]
+[ext_resource type="PackedScene" uid="uid://bo7ixlwbrmcbt" path="res://Scenes/bubble.tscn" id="2_fqyqa"]
 [ext_resource type="PackedScene" uid="uid://bitqosb72ka8i" path="res://Scenes/player.tscn" id="3_ga5nf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8nhe5"]
@@ -119,6 +120,10 @@ sources/0 = SubResource("TileSetAtlasSource_8nhe5")
 [node name="Game" type="Node2D"]
 script = ExtResource("1_umhj7")
 
+[node name="Bubble" parent="." instance=ExtResource("2_fqyqa")]
+visible = false
+position = Vector2(145, 73)
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_v6yq5")
 format = 2
@@ -127,11 +132,11 @@ layer_1/name = "Walls"
 layer_1/z_index = 1
 
 [node name="Player" parent="." instance=ExtResource("3_ga5nf")]
-position = Vector2(304, 168)
+position = Vector2(139, 73)
 scale = Vector2(-2.97535, 3.64637)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(7.058, -2.19396)
+position = Vector2(-2.35266, 1.09698)
 rotation = 3.14159
-scale = Vector2(0.336095, -0.274245)
-zoom = Vector2(7, 7)
+scale = Vector2(14.1313, -61.5803)
+zoom = Vector2(4, 4)

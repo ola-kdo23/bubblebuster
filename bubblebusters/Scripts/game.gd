@@ -3,8 +3,11 @@ class_name Maze
 
 @onready var tilemap=$TileMap
 @onready var player = $Player
+var bubblePath = preload("res://Scenes/bubble.tscn")
+
+
 #the width and height 
-var width = 37
+var width = 35
 var height = 21
 
 #map offset for UI purposes
@@ -13,7 +16,8 @@ var offset = 2
 const sourceID: int = 0
 
 var randy= RandomNumberGenerator.new()
-
+var spawnzone=[Vector2i(width/2-offset,height/2),
+	Vector2(width/2-offset,height/2+1), Vector2i(width/2-offset,height/2+offset)]
 
 func _ready() -> void:
 	generate_maze() #generate a map as soon as the game loads
@@ -30,8 +34,7 @@ func is_cell_empty(layer, coordinates):
 		
 func generate_maze():
 	#declare spawn zone for the player, preferably center of the maze
-	var spawnzone=[Vector2i(width/2-offset,height/2),
-	Vector2(width/2-offset,height/2+1), Vector2i(width/2-offset,height/2+offset)]
+	
 	
 	#create the exterior walls
 	for x in range(width):
@@ -58,16 +61,15 @@ func generate_maze():
 			#if youre at a cell or at the center of the maze skip those cells
 			if x%2 ==0 and y %2 ==0:
 				skip_cell=true
-			for center in spawnzone:
-				if current_cell.x==center.x && current_cell.y==center.y:
-					skip_cell=true
-					break
+			
+			if current_cell.x==120 && current_cell.y==120:
+				skip_cell=true
+				break
 			if skip_cell:
 				continue
 				
 			#when at an empty cell decide to add a tile or not
 			if is_cell_empty(1, current_cell):
-				print("yupe")
 				if randy.randf() < b:
 					tilemap.set_cell(1,current_cell,sourceID,Vector2i(6,0),0)
 	
@@ -77,4 +79,21 @@ func generate_maze():
 			var curent_tile = Vector2i(x,y+offset)
 			if(is_cell_empty(1,curent_tile))	:
 				tilemap.set_cell(0,curent_tile,sourceID,Vector2i(0,7),0)
-		
+				
+			
+				if randy.randf_range(0,1) < 0.12 && (curent_tile.x!=120 && curent_tile.y!=120):
+					print("hello")
+					var b= bubblePath.instantiate()
+					b.position= Vector2i((x*16)+8,((y+offset)*16)+8)
+					add_child(b)
+				
+	callPlayer()
+	
+
+func callPlayer():
+	player.position=Vector2i(120,120)
+	
+func bubblemaker():
+	var b= bubblePath.instantiate()
+	get_parent().add_child(b)
+	

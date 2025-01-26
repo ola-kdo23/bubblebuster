@@ -5,7 +5,7 @@ class_name Player
 var speed : int=50
 
 func ready():
-	pass
+	add_to_group("Player")
 
 func _physics_process(delta: float) -> void:
 	var player_move= Input.get_vector("ui_left","ui_right","ui_up","ui_down")
@@ -23,3 +23,4 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite2D.play("Idle")
 		
 	move_and_slide()
+	
